@@ -1,0 +1,377 @@
+/* ===============================================
+   DADOS DOS PROJETOS
+   =============================================== */
+
+const PROJECTS = [
+    {
+        id: 1,
+        title: 'SystemINV',
+        category: 'Sistema Web',
+        niche: 'Gestão de estoque e almoxarifado para indústria e logística',
+        roi: 'Redução de 25% no tempo de reposição e 18% de queda nas rupturas de estoque no primeiro semestre.',
+        description: 'Sistema completo de gestão de estoque e almoxarifado para operações industriais que precisam de alto controle de inventário.',
+        fullDescription: 'O SystemINV é um sistema web robusto e escalável, desenvolvido para gerenciar operações de estoque e almoxarifado em ambientes industriais e logísticos. Com interface intuitiva e recursos avançados, permite controle eficiente de inventário, rastreamento de materiais e geração de relatórios analíticos que suportam decisões operacionais rápidas.',
+        technologies: ['Node.js', 'Express', 'SQL Server', 'JavaScript', 'JWT', 'HTML', 'CSS'],
+        features: [
+            'Controle de estoque em tempo real',
+            'Entrada de materiais',
+            'Baixa de materiais',
+            'Histórico completo de movimentações',
+            'Histórico de pesquisas',
+            'Exportação PDF',
+            'Exportação Excel',
+            'Autenticação JWT',
+            'Controle de usuários e permissões',
+            'Dashboard com gráficos'
+        ],
+        challenges: 'O principal desafio foi criar um sistema com alta performance mesmo com grande volume de dados. Implementamos índices de banco de dados otimizados e cache semântica para garantir velocidade nas consultas. Também desenvolvemos um sistema robusto de auditoria para rastreamento completo de todas as movimentações.',
+        architecture: 'Arquitetura em camadas: Frontend (HTML/CSS/JS), Backend (Node.js/Express), Banco de Dados (SQL Server). Implementação de RESTful API com JWT para autenticação segura. Uso de padrões de design como MVC e Repository Pattern para melhor manutenibilidade.',
+        images: [
+            'assets/projects/systeminv/dashboard.png',
+            'assets/projects/systeminv/estoque.png',
+            'assets/projects/systeminv/relatorios.png',
+            'assets/projects/systeminv/usuarios.png'
+        ]
+    },
+    {
+        id: 2,
+        title: 'ORDS',
+        category: 'Sistema Web',
+        niche: 'Gerenciamento de ordens de serviço para manutenção industrial',
+        roi: 'Aumentou em 30% a eficiência de despacho e reduziu em 12% o ciclo de execução de ordens em ambiente industrial.',
+        description: 'Sistema de gerenciamento de Ordens de Serviço para manutenção industrial, focado em rastreabilidade e eficiência operacional.',
+        fullDescription: 'O ORDS (Ordem de Serviço) é uma solução completa para gerenciar ordens de serviço em operações de manutenção industrial. Oferece funcionalidades avançadas para planejamento, execução e controle, com relatórios detalhados e integração com sistemas legados, garantindo visibilidade total do fluxo de manutenção.',
+        technologies: ['Node.js', 'Express', 'SQL Server', 'JavaScript', 'HTML', 'CSS', 'jsPDF'],
+        features: [
+            'Cadastro de Ordens de Serviço',
+            'Consulta rápida de OS',
+            'Edição de OS',
+            'Controle de status',
+            'Gestão de mão de obra',
+            'Relatórios PDF',
+            'Filtros avançados',
+            'Acompanhamento em tempo real',
+            'Atribuição de técnicos',
+            'Histórico de alterações'
+        ],
+        challenges: 'A complexidade foi garantir a sincronização em tempo real entre múltiplos usuários acessando o mesmo sistema. Implementamos WebSockets para atualização instantânea de status e usamos transações de banco de dados para garantir consistência dos dados.',
+        architecture: 'Backend em Node.js com Express e SQL Server. Frontend responsivo com vanilla JavaScript. Implementação de sistema de notificações em tempo real. Uso de jsPDF para geração de relatórios dinâmicos. Integração com sistema de fila de tarefas para processamento assíncrono.',
+        images: [
+            'assets/projects/ords/lista-os.png',
+            'assets/projects/ords/editar-os.png',
+            'assets/projects/ords/relatorio.png',
+            'assets/projects/ords/dashboard.png'
+        ]
+    },
+    {
+        id: 3,
+        title: 'Dashboard SDR',
+        category: 'Dashboard Analytics',
+        niche: 'Analytics para equipes de SDR e vendas B2B',
+        roi: 'Aumentou em 22% a taxa de conversão e trouxe 15% de ganho de produtividade nas equipes de vendas.',
+        description: 'Dashboard de análise de dados para acompanhamento de Sales Development Representatives e conversões comerciais.',
+        fullDescription: 'Dashboard inteligente desenvolvido com Power BI e JavaScript, oferecendo visualizações poderosas de dados de Sales Development. Permite acompanhamento em tempo real de métricas, análise de performance e tomada de decisões baseada em dados, com foco em resultados comerciais e melhoria de funil.',
+        technologies: ['Power BI', 'JavaScript', 'SQL Server', 'HTML', 'CSS'],
+        features: [
+            'Visualização de métricas em tempo real',
+            'Análise de performance individual',
+            'Comparativas de período',
+            'Gráficos interativos',
+            'Filtros dinâmicos',
+            'Exportação de dados',
+            'Alertas automáticos',
+            'Drill-down em dados'
+        ],
+        challenges: 'O desafio principal foi processar grande volume de dados e renderizá-los de forma ágil sem impactar a performance. Utilizamos técnicas de agregação de dados e cache semântica para otimizar as consultas.',
+        architecture: 'Integração Power BI com JavaScript para customizações avançadas. Backend SQL Server com processamento de dados otimizado. Frontend interativo construído com vanilla JavaScript para manipulação de visualizações.',
+        images: [
+            'assets/projects/dashboard-sdr/overview.png',
+            'assets/projects/dashboard-sdr/performance.png',
+            'assets/projects/dashboard-sdr/comparativa.png',
+            'assets/projects/dashboard-sdr/detalhes.png'
+        ]
+    },
+    {
+        id: 4,
+        title: 'Olimpios',
+        category: 'Aplicação Web',
+        niche: 'Plataforma para eventos corporativos e competições esportivas',
+        roi: 'Redução de 40% no tempo de gerenciamento de inscrições e 20% de aumento na satisfação do público.',
+        description: 'Plataforma de gerenciamento para eventos e competições com controle de inscrições e resultados em tempo real.',
+        fullDescription: 'Olimpios é uma plataforma web completa para gerenciar eventos e competições de forma profissional. Oferece ferramentas para inscrição de participantes, acompanhamento de resultados, geração de rankings e prêmios em tempo real, garantindo facilidade operacional e experiência de usuário consistente.',
+        technologies: ['Node.js', 'Express', 'SQL Server', 'JavaScript', 'HTML', 'CSS'],
+        features: [
+            'Cadastro de eventos',
+            'Gerenciamento de participantes',
+            'Sistema de inscrição',
+            'Acompanhamento de resultados',
+            'Ranking em tempo real',
+            'Geração de certificados',
+            'Relatórios de participação',
+            'Integração de pontuação'
+        ],
+        challenges: 'Garantir a precisão dos rankings em tempo real foi um desafio importante. Implementamos um sistema de atualização em tempo real com validação rigorosa de dados e tratamento de conflitos de concorrência.',
+        architecture: 'Full Stack com Node.js/Express no backend e JavaScript vanilla no frontend. Banco de dados SQL Server com otimizações para consultas de ranking. Sistema de cache para melhor performance nas buscas de resultados.',
+        images: [
+            'assets/projects/olimpios/eventos.png',
+            'assets/projects/olimpios/inscricoes.png',
+            'assets/projects/olimpios/resultados.png',
+            'assets/projects/olimpios/ranking.png'
+        ]
+    },
+    {
+        id: 5,
+        title: 'Surpresa Emy',
+        category: 'Aplicação Web',
+        niche: 'Experiências digitais promocionais e campanhas interativas',
+        roi: 'Aumento de 28% no engajamento de usuários e 12% de crescimento nas interações mobile.',
+        description: 'Aplicação web especial com foco em experiência digital e campanhas promocionais interativas.',
+        fullDescription: 'Surpresa Emy é um projeto especial desenvolvido com foco em user experience e design moderno. Demonstra domínio completo de tecnologias front-end e criatividade na implementação de funcionalidades interativas, especialmente para campanhas promocionais com forte apelo visual.',
+        technologies: ['Node.js', 'JavaScript', 'HTML', 'CSS', 'MongoDB'],
+        features: [
+            'Interface moderna e responsiva',
+            'Animações fluidas',
+            'Gerenciamento de conteúdo',
+            'Sistema de feedback',
+            'Otimização para mobile',
+            'Acessibilidade total',
+            'Performance otimizada'
+        ],
+        challenges: 'O desafio foi criar uma experiência visual impactante mantendo a performance. Utilizamos técnicas avançadas de otimização como lazy loading, compressão de imagens e code splitting.',
+        architecture: 'Frontend com HTML5, CSS3 e JavaScript vanilla. Backend em Node.js com MongoDB para armazenamento de dados. Implementação de Progressive Web App para melhor experiência em dispositivos móveis.',
+        images: [
+            'assets/projects/surpresa-emy/home.png',
+            'assets/projects/surpresa-emy/galeria.png',
+            'assets/projects/surpresa-emy/detalhes.png',
+            'assets/projects/surpresa-emy/mobile.png'
+        ]
+    }
+];
+
+/* ===============================================
+   FUNÇÃO PARA CARREGAR PROJETOS
+   =============================================== */
+
+/**
+ * Renderiza a galeria de projetos dinamicamente
+ */
+function renderProjects() {
+    const projectsGrid = document.getElementById('projectsGrid');
+
+    if (!projectsGrid) return;
+
+    projectsGrid.innerHTML = '';
+
+    PROJECTS.forEach((project, index) => {
+        const projectCard = createProjectCard(project);
+        projectCard.classList.add('grid-item');
+        projectCard.style.animationDelay = `${index * 0.1}s`;
+        projectsGrid.appendChild(projectCard);
+    });
+}
+
+/**
+ * Cria um card de projeto
+ * @param {Object} project - Dados do projeto
+ * @returns {HTMLElement} - Elemento do card
+ */
+function createProjectCard(project) {
+    const card = document.createElement('div');
+    card.className = 'project-card';
+
+    // Criar imagem placeholder se não houver imagens
+    const imageHTML = project.images && project.images.length > 0
+        ? `<img src="${project.images[0]}" alt="${project.title}" style="display: none;" onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">`
+        : '';
+
+    card.innerHTML = `
+        <div class="project-image">
+            ${imageHTML}
+            <span>${project.title}</span>
+        </div>
+        <div class="project-content">
+            <span class="project-category">${project.category}</span>
+            <h3 class="project-title">${project.title}</h3>
+            <p class="project-description">${project.description}</p>
+            <div class="project-footer">
+                <div class="project-tech">
+                    ${project.technologies.slice(0, 2).map(tech => `<span class="tech-badge">${tech}</span>`).join('')}
+                    ${project.technologies.length > 2 ? `<span class="tech-badge">+${project.technologies.length - 2}</span>` : ''}
+                </div>
+                <button class="project-btn" data-project-id="${project.id}">Ver Projeto</button>
+            </div>
+        </div>
+    `;
+
+    card.addEventListener('click', (e) => {
+        if (e.target.classList.contains('project-btn')) {
+            openProjectModal(project);
+        }
+    });
+
+    return card;
+}
+
+/**
+ * Abre o modal do projeto
+ * @param {Object} project - Dados do projeto
+ */
+function openProjectModal(project) {
+    const modal = document.getElementById('projectModal');
+    if (!modal) return;
+
+    // Preencher dados do modal
+    document.getElementById('modalTitle').textContent = project.title;
+    document.getElementById('modalCategory').textContent = project.category;
+    document.getElementById('modalDescription').textContent = project.fullDescription;
+
+    // Preencher funcionalidades
+    const featuresList = document.getElementById('featuresList');
+    featuresList.innerHTML = '';
+    project.features.forEach(feature => {
+        const li = document.createElement('li');
+        li.textContent = feature;
+        featuresList.appendChild(li);
+    });
+
+    // Preencher tecnologias
+    const techTags = document.getElementById('techTags');
+    techTags.innerHTML = '';
+    project.technologies.forEach(tech => {
+        const tag = document.createElement('div');
+        tag.className = 'tech-tag';
+        tag.textContent = tech;
+        techTags.appendChild(tag);
+    });
+
+    // Preencher nicho, ROI, desafios e arquitetura
+    const modalNiche = document.getElementById('modalNiche');
+    const modalRoi = document.getElementById('modalRoi');
+    modalNiche.textContent = project.niche ? `Nicho: ${project.niche}` : '';
+    modalRoi.textContent = project.roi ? `ROI: ${project.roi}` : '';
+    document.getElementById('modalChallenges').textContent = project.challenges;
+    document.getElementById('modalArchitecture').textContent = project.architecture;
+
+    // Preencher carrossel
+    const carouselTrack = document.getElementById('modalCarouselTrack');
+    const carouselDots = document.getElementById('modalCarouselDots');
+    carouselTrack.innerHTML = '';
+    carouselDots.innerHTML = '';
+
+    if (project.images && project.images.length > 0) {
+        project.images.forEach((image, index) => {
+            // Criar slide
+            const slide = document.createElement('div');
+            slide.className = 'carousel-slide';
+            if (index === 0) slide.classList.add('active');
+
+            // Tentar carregar imagem, se falhar mostrar placeholder
+            slide.innerHTML = `<img src="${image}" alt="Projeto ${project.title}" onload="this.parentElement.classList.remove('no-image')" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';"/>`;
+
+            carouselTrack.appendChild(slide);
+
+            // Criar dot
+            const dot = document.createElement('div');
+            dot.className = 'carousel-dot';
+            if (index === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => {
+                updateCarousel(index);
+            });
+            carouselDots.appendChild(dot);
+        });
+    }
+
+    // Mostrar modal
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+/**
+ * Fecha o modal
+ */
+function closeProjectModal() {
+    const modal = document.getElementById('projectModal');
+    if (modal) {
+        modal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+/**
+ * Atualiza o carrossel do modal
+ * @param {number} index - Índice do slide
+ */
+function updateCarousel(index) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.carousel-dot');
+
+    if (slides.length === 0) return;
+
+    slides.forEach(slide => slide.classList.remove('active'));
+    dots.forEach(dot => dot.classList.remove('active'));
+
+    slides[index].classList.add('active');
+    dots[index].classList.add('active');
+
+    const track = document.getElementById('modalCarouselTrack');
+    track.style.transform = `translateX(-${index * 100}%)`;
+}
+
+/**
+ * Navega no carrossel
+ * @param {number} direction - 1 para próximo, -1 para anterior
+ */
+function navigateCarousel(direction) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    if (slides.length === 0) return;
+
+    const activeIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+    let newIndex = activeIndex + direction;
+
+    if (newIndex < 0) newIndex = slides.length - 1;
+    if (newIndex >= slides.length) newIndex = 0;
+
+    updateCarousel(newIndex);
+}
+
+/* ===============================================
+   INICIALIZAÇÃO
+   =============================================== */
+
+// Renderizar projetos quando o DOM estiver pronto
+document.addEventListener('DOMContentLoaded', renderProjects);
+
+// Fechar modal ao clicar no botão fechar
+document.addEventListener('DOMContentLoaded', () => {
+    const modalClose = document.querySelector('.modal-close');
+    const modal = document.getElementById('projectModal');
+    const prevBtn = document.querySelector('.carousel-prev');
+    const nextBtn = document.querySelector('.carousel-next');
+
+    if (modalClose) {
+        modalClose.addEventListener('click', closeProjectModal);
+    }
+
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeProjectModal();
+            }
+        });
+    }
+
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => navigateCarousel(-1));
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => navigateCarousel(1));
+    }
+});
+
+// Fechar modal com tecla ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeProjectModal();
+    }
+});
