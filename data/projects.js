@@ -57,7 +57,10 @@ const PROJECTS = [
         challenges: 'A complexidade foi garantir a sincronização em tempo real entre múltiplos usuários acessando o mesmo sistema. Implementamos WebSockets para atualização instantânea de status e usamos transações de banco de dados para garantir consistência dos dados.',
         architecture: 'Backend em Node.js com Express e SQL Server. Frontend responsivo com vanilla JavaScript. Implementação de sistema de notificações em tempo real. Uso de jsPDF para geração de relatórios dinâmicos. Integração com sistema de fila de tarefas para processamento assíncrono.',
         images: [
-            // Pasta ausente no repositório — manter lista vazia para mostrar placeholder
+            'assets/projects/ords/tela inicial.jpeg',
+            'assets/projects/ords/cadastros de OS.jpeg',
+            'assets/projects/ords/Editar OS.jpeg',
+            'assets/projects/ords/Visualização de OS.jpeg'
         ]
     },
     {
@@ -89,23 +92,23 @@ const PROJECTS = [
         id: 4,
         title: 'Olimpios',
         category: 'Aplicação Web',
-        niche: 'Plataforma para eventos corporativos e competições esportivas',
-        roi: 'Redução de 40% no tempo de gerenciamento de inscrições e 20% de aumento na satisfação do público.',
-        description: 'Plataforma de gerenciamento para eventos e competições com controle de inscrições e resultados em tempo real.',
-        fullDescription: 'Olimpios é uma plataforma web completa para gerenciar eventos e competições de forma profissional. Oferece ferramentas para inscrição de participantes, acompanhamento de resultados, geração de rankings e prêmios em tempo real, garantindo facilidade operacional e experiência de usuário consistente.',
-        technologies: ['Node.js', 'Express', 'SQL Server', 'JavaScript', 'HTML', 'CSS'],
+        niche: 'Sistema de agendamento para barbearia com gestão de horários e integração WhatsApp',
+        roi: 'Redução de até 40% no tempo de agendamento e aumento da taxa de confirmação de horários.',
+        description: 'Sistema web para agendamento de horários em barbearias, com controle de agenda, disponibilidade e envio automático de lembretes via WhatsApp.',
+        fullDescription: 'Olimpios é uma plataforma voltada para gestão de barbearias, permitindo que clientes agendem horários online, visualizem disponibilidade em tempo real e recebam confirmações por WhatsApp. Para os donos, o sistema oferece controle da agenda, bloqueio de horários, organização de profissionais e acompanhamento do fluxo de atendimentos.',
+        technologies: ['Node.js', 'Express', 'SQL Server', 'JavaScript', 'HTML', 'CSS', 'WhatsApp API'],
         features: [
-            'Cadastro de eventos',
-            'Gerenciamento de participantes',
-            'Sistema de inscrição',
-            'Acompanhamento de resultados',
-            'Ranking em tempo real',
-            'Geração de certificados',
-            'Relatórios de participação',
-            'Integração de pontuação'
+            'Agendamento online de horários',
+            'Controle de horários livres e marcados',
+            'Gestão de profissionais e serviços',
+            'Bloqueio de agenda por período',
+            'Confirmação automática via WhatsApp',
+            'Lembretes de atendimento',
+            'Painel administrativo da barbearia',
+            'Histórico de agendamentos'
         ],
-        challenges: 'Garantir a precisão dos rankings em tempo real foi um desafio importante. Implementamos um sistema de atualização em tempo real com validação rigorosa de dados e tratamento de conflitos de concorrência.',
-        architecture: 'Full Stack com Node.js/Express no backend e JavaScript vanilla no frontend. Banco de dados SQL Server com otimizações para consultas de ranking. Sistema de cache para melhor performance nas buscas de resultados.',
+        challenges: 'O maior desafio foi garantir que a agenda permanecesse atualizada em tempo real e que o envio de mensagens pelo WhatsApp fosse confiável, mesmo com múltiplos agendamentos simultâneos. Para isso, implementamos validações de conflitos e integrações com API para notificações automáticas.',
+        architecture: 'Arquitetura full stack com Node.js/Express no backend, SQL Server para armazenamento dos dados e JavaScript no frontend. O sistema utiliza integração com API do WhatsApp para comunicação automática e um painel administrativo responsivo para acompanhamento da agenda.',
         images: [
             'assets/projects/olimpios/Captura de tela 2026-06-15 160146.png',
             'assets/projects/olimpios/Captura de tela 2026-06-15 160207.png',
@@ -176,11 +179,14 @@ function createProjectCard(project) {
         carouselHTML = `
             <div class="card-carousel" data-card-id="${project.id}">
                 <div class="card-carousel-track" id="cardCarouselTrack-${project.id}">
-                    ${project.images.map((img, i) => `
-                        <div class="card-slide ${i === 0 ? 'active' : ''}">
-                            <img src="${img}" alt="${project.title} - ${i + 1}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';" />
-                        </div>
-                    `).join('')}
+                    ${project.images.map((img, i) => {
+                        const imageUrl = encodeURI(img);
+                        return `
+                            <div class="card-slide ${i === 0 ? 'active' : ''}">
+                                <img src="${imageUrl}" alt="${project.title} - ${i + 1}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';" />
+                            </div>
+                        `;
+                    }).join('')}
                 </div>
                 <button class="card-carousel-btn card-carousel-prev">❮</button>
                 <button class="card-carousel-btn card-carousel-next">❯</button>
@@ -317,8 +323,10 @@ function openProjectModal(project) {
             slide.className = 'carousel-slide';
             if (index === 0) slide.classList.add('active');
 
+            const imageUrl = encodeURI(image);
+
             // Tentar carregar imagem, se falhar mostrar placeholder
-            slide.innerHTML = `<img src="${image}" alt="Projeto ${project.title}" onload="this.parentElement.classList.remove('no-image')" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';"/>`;
+            slide.innerHTML = `<img src="${imageUrl}" alt="Projeto ${project.title}" onload="this.parentElement.classList.remove('no-image')" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';"/>`;
 
             carouselTrack.appendChild(slide);
 
@@ -331,6 +339,8 @@ function openProjectModal(project) {
             });
             carouselDots.appendChild(dot);
         });
+
+        updateCarousel(0);
     }
 
     // Mostrar modal
