@@ -69,9 +69,9 @@ const PROJECTS = [
         category: 'Dashboard Analytics',
         niche: 'Analytics para equipes de SDR e vendas B2B',
         roi: 'Aumentou em 22% a taxa de conversão e trouxe 15% de ganho de produtividade nas equipes de vendas.',
-        description: 'Dashboard de análise de dados para acompanhamento de Sales Development Representatives e conversões comerciais.',
-        fullDescription: 'Dashboard inteligente desenvolvido com Power BI e JavaScript, oferecendo visualizações poderosas de dados de Sales Development. Permite acompanhamento em tempo real de métricas, análise de performance e tomada de decisões baseada em dados, com foco em resultados comerciais e melhoria de funil.',
-        technologies: ['Power BI', 'JavaScript', 'SQL Server', 'HTML', 'CSS'],
+        description: 'Dashboard de análise de dados para equipes de SDR, construído com foco em tratamento de dados em Python e visualização em Power BI.',
+        fullDescription: 'Dashboard desenvolvido com pipeline de dados em Python para ingestão e transformação, uso de Power Query/Excel para preparação quando necessário, e visualizações interativas em Power BI. Integrações e análises complementares realizadas em Looker e Google Sheets para colaboração e distribuição de relatórios.',
+        technologies: ['Python', 'Power BI', 'Excel', 'Power Query', 'Looker', 'Google Sheets'],
         features: [
             'Visualização de métricas em tempo real',
             'Análise de performance individual',
@@ -179,14 +179,32 @@ function createProjectCard(project) {
     const card = document.createElement('div');
     card.className = 'project-card';
 
-    // Criar imagem placeholder se não houver imagens
-    const imageHTML = project.images && project.images.length > 0
-        ? `<img src="${project.images[0]}" alt="${project.title}" style="display: none;" onerror="this.style.display='none'; this.parentElement.classList.add('no-image');">`
-        : '';
+    // Criar carrossel interno do card ou placeholder
+    let carouselHTML = '';
+    if (project.images && project.images.length > 0) {
+        carouselHTML = `
+            <div class="card-carousel" data-card-id="${project.id}">
+                <div class="card-carousel-track" id="cardCarouselTrack-${project.id}">
+                    ${project.images.map((img, i) => `
+                        <div class="card-slide ${i === 0 ? 'active' : ''}">
+                            <img src="${img}" alt="${project.title} - ${i + 1}" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';" />
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="card-carousel-btn card-carousel-prev">❮</button>
+                <button class="card-carousel-btn card-carousel-next">❯</button>
+                <div class="card-carousel-dots" id="cardCarouselDots-${project.id}">
+                    ${project.images.map((_, i) => `<div class="card-carousel-dot ${i === 0 ? 'active' : ''}" data-index="${i}"></div>`).join('')}
+                </div>
+            </div>
+        `;
+    } else {
+        carouselHTML = `<div class="project-thumb placeholder"></div>`;
+    }
 
     card.innerHTML = `
         <div class="project-image">
-            ${imageHTML}
+            ${carouselHTML}
             <span>${project.title}</span>
         </div>
         <div class="project-content">
@@ -202,6 +220,49 @@ function createProjectCard(project) {
             </div>
         </div>
     `;
+
+    // Configurar eventos do carrossel interno do card
+    if (project.images && project.images.length > 0) {
+        const cardId = project.id;
+        const track = card.querySelector(`#cardCarouselTrack-${cardId}`);
+        const slides = card.querySelectorAll('.card-slide');
+        const dots = card.querySelectorAll('.card-carousel-dot');
+        const prevBtn = card.querySelector('.card-carousel-prev');
+        const nextBtn = card.querySelector('.card-carousel-next');
+
+        function updateCardCarousel(index) {
+            const idx = Number(index);
+            slides.forEach(s => s.classList.remove('active'));
+            dots.forEach(d => d.classList.remove('active'));
+            if (slides[idx]) slides[idx].classList.add('active');
+            if (dots[idx]) dots[idx].classList.add('active');
+            if (track) track.style.transform = `translateX(-${idx * 100}%`;
+        }
+
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+            let newIndex = activeIndex - 1;
+            if (newIndex < 0) newIndex = slides.length - 1;
+            updateCardCarousel(newIndex);
+        });
+
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const activeIndex = Array.from(slides).findIndex(s => s.classList.contains('active'));
+            let newIndex = activeIndex + 1;
+            if (newIndex >= slides.length) newIndex = 0;
+            updateCardCarousel(newIndex);
+        });
+
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = dot.getAttribute('data-index');
+                updateCardCarousel(idx);
+            });
+        });
+    }
 
     card.addEventListener('click', (e) => {
         if (e.target.classList.contains('project-btn')) {
