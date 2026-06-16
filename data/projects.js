@@ -27,10 +27,10 @@ const PROJECTS = [
         challenges: 'O principal desafio foi criar um sistema com alta performance mesmo com grande volume de dados. Implementamos índices de banco de dados otimizados e cache semântica para garantir velocidade nas consultas. Também desenvolvemos um sistema robusto de auditoria para rastreamento completo de todas as movimentações.',
         architecture: 'Arquitetura em camadas: Frontend (HTML/CSS/JS), Backend (Node.js/Express), Banco de Dados (SQL Server). Implementação de RESTful API com JWT para autenticação segura. Uso de padrões de design como MVC e Repository Pattern para melhor manutenibilidade.',
         images: [
-            'assets/projects/systeminv/dashboard.png',
-            'assets/projects/systeminv/estoque.png',
-            'assets/projects/systeminv/relatorios.png',
-            'assets/projects/systeminv/usuarios.png'
+            'assets/projects/systeminv/tela de login.jpeg',
+            'assets/projects/systeminv/tela de listagem de items.jpeg',
+            'assets/projects/systeminv/tela de historico de movimentações.jpeg',
+            'assets/projects/systeminv/tela de gerenciamento de usuarios(somente admin).jpeg'
         ]
     },
     {
@@ -57,10 +57,7 @@ const PROJECTS = [
         challenges: 'A complexidade foi garantir a sincronização em tempo real entre múltiplos usuários acessando o mesmo sistema. Implementamos WebSockets para atualização instantânea de status e usamos transações de banco de dados para garantir consistência dos dados.',
         architecture: 'Backend em Node.js com Express e SQL Server. Frontend responsivo com vanilla JavaScript. Implementação de sistema de notificações em tempo real. Uso de jsPDF para geração de relatórios dinâmicos. Integração com sistema de fila de tarefas para processamento assíncrono.',
         images: [
-            'assets/projects/ords/lista-os.png',
-            'assets/projects/ords/editar-os.png',
-            'assets/projects/ords/relatorio.png',
-            'assets/projects/ords/dashboard.png'
+            // Pasta ausente no repositório — manter lista vazia para mostrar placeholder
         ]
     },
     {
@@ -85,10 +82,7 @@ const PROJECTS = [
         challenges: 'O desafio principal foi processar grande volume de dados e renderizá-los de forma ágil sem impactar a performance. Utilizamos técnicas de agregação de dados e cache semântica para otimizar as consultas.',
         architecture: 'Integração Power BI com JavaScript para customizações avançadas. Backend SQL Server com processamento de dados otimizado. Frontend interativo construído com vanilla JavaScript para manipulação de visualizações.',
         images: [
-            'assets/projects/dashboard-sdr/overview.png',
-            'assets/projects/dashboard-sdr/performance.png',
-            'assets/projects/dashboard-sdr/comparativa.png',
-            'assets/projects/dashboard-sdr/detalhes.png'
+            'assets/projects/dashboard-sdr/IMG-20251028-WA0084(1).jpg'
         ]
     },
     {
@@ -113,10 +107,10 @@ const PROJECTS = [
         challenges: 'Garantir a precisão dos rankings em tempo real foi um desafio importante. Implementamos um sistema de atualização em tempo real com validação rigorosa de dados e tratamento de conflitos de concorrência.',
         architecture: 'Full Stack com Node.js/Express no backend e JavaScript vanilla no frontend. Banco de dados SQL Server com otimizações para consultas de ranking. Sistema de cache para melhor performance nas buscas de resultados.',
         images: [
-            'assets/projects/olimpios/eventos.png',
-            'assets/projects/olimpios/inscricoes.png',
-            'assets/projects/olimpios/resultados.png',
-            'assets/projects/olimpios/ranking.png'
+            'assets/projects/olimpios/Captura de tela 2026-06-15 160146.png',
+            'assets/projects/olimpios/Captura de tela 2026-06-15 160207.png',
+            'assets/projects/olimpios/Captura de tela 2026-06-15 160232.png',
+            'assets/projects/olimpios/loginolimpios.png'
         ]
     },
     {
@@ -140,10 +134,7 @@ const PROJECTS = [
         challenges: 'O desafio foi criar uma experiência visual impactante mantendo a performance. Utilizamos técnicas avançadas de otimização como lazy loading, compressão de imagens e code splitting.',
         architecture: 'Frontend com HTML5, CSS3 e JavaScript vanilla. Backend em Node.js com MongoDB para armazenamento de dados. Implementação de Progressive Web App para melhor experiência em dispositivos móveis.',
         images: [
-            'assets/projects/surpresa-emy/home.png',
-            'assets/projects/surpresa-emy/galeria.png',
-            'assets/projects/surpresa-emy/detalhes.png',
-            'assets/projects/surpresa-emy/mobile.png'
+            // Sem imagens atualmente na pasta; ficará como placeholder
         ]
     }
 ];
@@ -236,7 +227,7 @@ function createProjectCard(project) {
             dots.forEach(d => d.classList.remove('active'));
             if (slides[idx]) slides[idx].classList.add('active');
             if (dots[idx]) dots[idx].classList.add('active');
-            if (track) track.style.transform = `translateX(-${idx * 100}%`;
+            if (track) track.style.transform = `translateX(-${idx * 100}%)`;
         }
 
         prevBtn.addEventListener('click', (e) => {
